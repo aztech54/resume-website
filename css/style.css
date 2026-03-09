@@ -323,20 +323,21 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   opacity: 0;
   animation: heroFadeIn 0.7s ease 1.6s forwards;
 }
 .scroll-label {
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-muted-light);
+  color: var(--color-muted);
   writing-mode: vertical-rl;
+  font-weight: 500;
 }
 .scroll-line {
-  width: 1.5px;
-  height: 58px;
+  width: 2.5px;
+  height: 80px;
   background: var(--color-border);
   position: relative;
   overflow: hidden;
@@ -344,13 +345,13 @@ ul { list-style: none; }
 }
 .scroll-dot {
   position: absolute;
-  top: -10px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 10px;
+  width: 6px;
+  height: 14px;
   background: var(--color-green);
-  border-radius: 2px;
+  border-radius: 3px;
   animation: scrollDown 1.6s ease-in-out infinite;
 }
 
@@ -550,7 +551,20 @@ ul { list-style: none; }
   padding: 6px 16px;
   text-transform: uppercase;
 }
-.exp-badge--secondary { background: var(--color-brown-light); }
+.exp-badge--current  { background: var(--color-green); }
+.exp-badge--past     { background: #a0503e; }
+
+.exp-date--current {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-green);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
 
 .exp-body { padding: 22px 24px; }
 

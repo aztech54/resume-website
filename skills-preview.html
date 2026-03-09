@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills Section — Preview All 3 Options</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary:       #f5f2ec;
+      --bg-secondary:     #ede8df;
+      --color-dark:       #2c2416;
+      --color-dark-soft:  #3d3325;
+      --color-green:      #5a7a5a;
+      --color-green-light:#93b893;
+      --color-brown:      #8b7355;
+      --color-brown-light:#b59a7a;
+      --color-muted:      #6b5e4e;
+      --color-muted-light:#9c8e7e;
+      --color-border:     #ddd5c8;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg-primary); color: var(--color-dark); }
+
+    /* ---- NAV TABS ---- */
+    .tab-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245,242,236,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0 2rem;
+    }
+    .tab {
+      padding: 18px 32px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      cursor: pointer;
+      border-bottom: 2.5px solid transparent;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .tab:hover { color: var(--color-dark); }
+    .tab.active { color: var(--color-green); border-bottom-color: var(--color-green); }
+
+    /* ---- SHARED SECTION STYLES ---- */
+    .demo-section {
+      padding: 80px 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .demo-section:nth-child(odd) { background: var(--bg-secondary); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    .option-label {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .option-badge {
+      display: inline-block;
+      background: var(--color-green);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .option-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+    .option-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    /* ================================================
+       OPTION B — FLOATING TAG CLOUD
+       ================================================ */
+    .skill-cloud-wrap {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--bg-primary);
+      border: 1px solid var(--color-border);
+    }
+    .skill-cloud-wrap canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .skill-tag {
+      position: absolute;
+      padding: 8px 16px;
+      background: rgba(245, 242, 236, 0.85);
+      border: 1.5px solid rgba(90, 122, 90, 0.35);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-dark-soft);
+      white-space: nowrap;
+      cursor: default;
+      user-select: none;
+      transition: background 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .skill-tag:hover {
+      background: var(--color-green);
+      border-color: var(--color-green);
+      color: white;
+      box-shadow: 0 4px 20px rgba(90, 122, 90, 0.35);
+      transform: scale(1.08);
+      z-index: 10;
+    }
+
+    /* ================================================
+       OPTION A+D — THREE TIER CARDS
+       ================================================ */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .tier-card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .tier-card:hover { box-shadow: 0 8px 32px rgba(44,36,22,0.12); transform: translateY(-4px); }
+
+    .tier-header {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tier-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tier-dot--proficient { background: var(--color-green); box-shadow: 0 0 0 3px rgba(90,122,90,0.2); }
+    .tier-dot--familiar   { background: var(--color-brown-light); }
+    .tier-dot--exploring  { background: #b0c4de; }
+
+    .tier-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .tier-sublabel {
+      font-size: 0.68rem;
+      color: var(--color-muted-light);
+      margin-left: auto;
+    }
+
+    .tier-body { padding: 18px 22px; }
+    .tier-category { margin-bottom: 18px; }
+    .tier-category:last-child { margin-bottom: 0; }
+    .tier-cat-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-brown);
+      margin-bottom: 8px;
+    }
+    .tier-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tier-pill {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 100px;
+      border: 1px solid var(--color-border);
+      background: var(--bg-secondary);
+      color: var(--color-dark-soft);
+      transition: all 0.2s;
+    }
+    .tier-pill:hover { border-color: var(--color-green); color: var(--color-green); }
+
+    /* ================================================
+       OPTION A+D+B — FLOATING BACKGROUND + TIER CARDS
+       ================================================ */
+    .combo-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      padding: 40px 32px;
+    }
+    .combo-canvas-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .combo-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .combo-card {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(221,213,200,0.7);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .combo-card:hover { box-shadow: 0 8px 32px rgba(44,36,22,0.14); transform: translateY(-4px); }
+    .combo-header {
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid rgba(221,213,200,0.6);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .combo-body { padding: 16px 20px; }
+    .combo-category { margin-bottom: 16px; }
+    .combo-category:last-child { margin-bottom: 0; }
+    .combo-cat-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-brown);
+      margin-bottom: 7px;
+    }
+    .combo-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .combo-pill {
+      font-size: 0.73rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 100px;
+      border: 1px solid rgba(221,213,200,0.8);
+      background: rgba(245,242,236,0.6);
+      color: var(--color-dark-soft);
+      transition: all 0.2s;
+    }
+    .combo-pill:hover { border-color: var(--color-green); color: var(--color-green); }
+
+    /* ---- PICK BUTTON ---- */
+    .pick-wrap { text-align: center; margin-top: 48px; }
+    .pick-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--color-green);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.25s;
+    }
+    .pick-btn:hover { background: var(--color-dark); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(44,36,22,0.2); }
+  </style>
+</head>
+<body>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <a href="#optionB"  class="tab active">B — Floating Cloud</a>
+    <a href="#optionAD" class="tab">A+D — Tier Cards</a>
+    <a href="#optionADB" class="tab">A+D+B — Both</a>
+  </div>
+
+  <!-- ================================================
+       OPTION B — FLOATING TAG CLOUD
+       ================================================ -->
+  <section class="demo-section" id="optionB">
+    <div class="container">
+      <div class="option-label">
+        <div class="option-badge">Option B</div>
+        <h2 class="option-title">Floating Tag Cloud</h2>
+        <p class="option-desc">All skills drift freely. Hover a tag to highlight it. Zero implied levels.</p>
+      </div>
+      <div class="skill-cloud-wrap" id="cloudWrapB">
+        <!-- Tags injected by JS -->
+      </div>
+      <div class="pick-wrap">
+        <button class="pick-btn" onclick="alert('Option B selected! Go tell Claude.')">★ Pick This One</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       OPTION A+D — THREE TIER CARDS
+       ================================================ -->
+  <section class="demo-section" id="optionAD">
+    <div class="container">
+      <div class="option-label">
+        <div class="option-badge">Option A+D</div>
+        <h2 class="option-title">Tier Cards</h2>
+        <p class="option-desc">Three honest buckets — Proficient, Familiar, Exploring. Fully defensible in any interview.</p>
+      </div>
+      <div class="tier-grid">
+
+        <!-- PROFICIENT -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <div class="tier-dot tier-dot--proficient"></div>
+            <span class="tier-label">Proficient</span>
+            <span class="tier-sublabel">Used in real work</span>
+          </div>
+          <div class="tier-body">
+            <div class="tier-category">
+              <div class="tier-cat-label">Networking</div>
+              <div class="tier-pills">
+                <span class="tier-pill">TCP/IP</span>
+                <span class="tier-pill">Wireshark</span>
+                <span class="tier-pill">Cisco Routers</span>
+                <span class="tier-pill">Subnetting</span>
+              </div>
+            </div>
+            <div class="tier-category">
+              <div class="tier-cat-label">Support</div>
+              <div class="tier-pills">
+                <span class="tier-pill">Tier 1 Helpdesk</span>
+                <span class="tier-pill">Troubleshooting</span>
+                <span class="tier-pill">Account Mgmt</span>
+              </div>
+            </div>
+            <div class="tier-category">
+              <div class="tier-cat-label">Web</div>
+              <div class="tier-pills">
+                <span class="tier-pill">HTML / CSS</span>
+                <span class="tier-pill">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAMILIAR -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <div class="tier-dot tier-dot--familiar"></div>
+            <span class="tier-label">Familiar</span>
+            <span class="tier-sublabel">Coursework &amp; labs</span>
+          </div>
+          <div class="tier-body">
+            <div class="tier-category">
+              <div class="tier-cat-label">Security</div>
+              <div class="tier-pills">
+                <span class="tier-pill">Metasploit</span>
+                <span class="tier-pill">Pen Testing</span>
+                <span class="tier-pill">NIST Framework</span>
+                <span class="tier-pill">Wireshark</span>
+              </div>
+            </div>
+            <div class="tier-category">
+              <div class="tier-cat-label">Scripting</div>
+              <div class="tier-pills">
+                <span class="tier-pill">PowerShell</span>
+                <span class="tier-pill">Bash</span>
+                <span class="tier-pill">SQL / MySQL</span>
+                <span class="tier-pill">C#</span>
+              </div>
+            </div>
+            <div class="tier-category">
+              <div class="tier-cat-label">Systems</div>
+              <div class="tier-pills">
+                <span class="tier-pill">Linux</span>
+                <span class="tier-pill">Samba Server</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPLORING -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <div class="tier-dot tier-dot--exploring"></div>
+            <span class="tier-label">Exploring</span>
+            <span class="tier-sublabel">Actively learning</span>
+          </div>
+          <div class="tier-body">
+            <div class="tier-category">
+              <div class="tier-cat-label">Virtualization</div>
+              <div class="tier-pills">
+                <span class="tier-pill">VMware</span>
+                <span class="tier-pill">VirtualBox</span>
+              </div>
+            </div>
+            <div class="tier-category">
+              <div class="tier-cat-label">Server Admin</div>
+              <div class="tier-pills">
+                <span class="tier-pill">Windows Server 2022</span>
+                <span class="tier-pill">Active Directory</span>
+                <span class="tier-pill">GPO</span>
+                <span class="tier-pill">DNS</span>
+              </div>
+            </div>
+            <div class="tier-category">
+              <div class="tier-cat-label">Cloud</div>
+              <div class="tier-pills">
+                <span class="tier-pill">Azure (basics)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="pick-wrap">
+        <button class="pick-btn" onclick="alert('Option A+D selected! Go tell Claude.')">★ Pick This One</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       OPTION A+D+B — FLOATING BG + TIER CARDS
+       ================================================ -->
+  <section class="demo-section" id="optionADB">
+    <div class="container">
+      <div class="option-label">
+        <div class="option-badge">Option A+D+B</div>
+        <h2 class="option-title">Floating Background + Tier Cards</h2>
+        <p class="option-desc">Skills drift in the background. Clean frosted glass cards sit on top. Motion + structure.</p>
+      </div>
+      <div class="combo-wrap" id="comboWrap">
+        <canvas class="combo-canvas-bg" id="comboBg"></canvas>
+        <div class="combo-grid">
+
+          <div class="combo-card">
+            <div class="combo-header">
+              <div class="tier-dot tier-dot--proficient"></div>
+              <span class="tier-label">Proficient</span>
+            </div>
+            <div class="combo-body">
+              <div class="combo-category">
+                <div class="combo-cat-label">Networking</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">TCP/IP</span>
+                  <span class="combo-pill">Wireshark</span>
+                  <span class="combo-pill">Cisco Routers</span>
+                  <span class="combo-pill">Subnetting</span>
+                </div>
+              </div>
+              <div class="combo-category">
+                <div class="combo-cat-label">Support</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">Tier 1 Helpdesk</span>
+                  <span class="combo-pill">Troubleshooting</span>
+                </div>
+              </div>
+              <div class="combo-category">
+                <div class="combo-cat-label">Web</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">HTML / CSS / JS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="combo-card">
+            <div class="combo-header">
+              <div class="tier-dot tier-dot--familiar"></div>
+              <span class="tier-label">Familiar</span>
+            </div>
+            <div class="combo-body">
+              <div class="combo-category">
+                <div class="combo-cat-label">Security</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">Metasploit</span>
+                  <span class="combo-pill">Pen Testing</span>
+                  <span class="combo-pill">NIST</span>
+                </div>
+              </div>
+              <div class="combo-category">
+                <div class="combo-cat-label">Scripting</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">PowerShell</span>
+                  <span class="combo-pill">Bash</span>
+                  <span class="combo-pill">SQL</span>
+                  <span class="combo-pill">C#</span>
+                </div>
+              </div>
+              <div class="combo-category">
+                <div class="combo-cat-label">Systems</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">Linux</span>
+                  <span class="combo-pill">Samba</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="combo-card">
+            <div class="combo-header">
+              <div class="tier-dot tier-dot--exploring"></div>
+              <span class="tier-label">Exploring</span>
+            </div>
+            <div class="combo-body">
+              <div class="combo-category">
+                <div class="combo-cat-label">Virtualization</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">VMware</span>
+                  <span class="combo-pill">VirtualBox</span>
+                </div>
+              </div>
+              <div class="combo-category">
+                <div class="combo-cat-label">Server Admin</div>
+                <div class="combo-pills">
+                  <span class="combo-pill">Windows Server 2022</span>
+                  <span class="combo-pill">Active Directory</span>
+                  <span class="combo-pill">GPO</span>
+                  <span class="combo-pill">DNS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="pick-wrap">
+        <button class="pick-btn" onclick="alert('Option A+D+B selected! Go tell Claude.')">★ Pick This One</button>
+      </div>
+    </div>
+  </section>
+
+<script>
+'use strict';
+
+const SKILLS = [
+  'Cisco Routers','TCP/IP','VLAN','Subnetting','Wireshark','Packet Tracer',
+  'Active Directory','Windows Server 2022','Ubuntu Server','Samba Server',
+  'VMware','VirtualBox','Metasploit','Pen Testing','Network Forensics',
+  'NIST Framework','Info Assurance','PowerShell','Bash','HTML/CSS/JS',
+  'C#','SQL / MySQL','PuTTY','WinSCP','Tier 1 Support','Troubleshooting',
+  'Google Analytics','Tag Manager','Linux','Network Security','DNS','GPO',
+];
+
+/* ---- OPTION B: Floating DOM tags ---- */
+function initCloudB() {
+  const wrap = document.getElementById('cloudWrapB');
+  if (!wrap) return;
+
+  const tags = SKILLS.map(skill => {
+    const el = document.createElement('span');
+    el.className = 'skill-tag';
+    el.textContent = skill;
+    wrap.appendChild(el);
+    return el;
+  });
+
+  // Wait one frame to get element sizes
+  requestAnimationFrame(() => {
+    const W = wrap.offsetWidth;
+    const H = wrap.offsetHeight;
+    const PAD = 50;
+
+    const nodes = tags.map(el => {
+      const tw = el.offsetWidth;
+      const th = el.offsetHeight;
+      const x = PAD + Math.random() * (W - tw - PAD * 2);
+      const y = PAD + Math.random() * (H - th - PAD * 2);
+      el.style.left = x + 'px';
+      el.style.top  = y + 'px';
+      return {
+        el, tw, th,
+        baseX: x, baseY: y,
+        px: Math.random() * Math.PI * 2,
+        py: Math.random() * Math.PI * 2,
+        spd: 0.00025 + Math.random() * 0.00025,
+        amp: 6 + Math.random() * 10,
+      };
+    });
+
+    function tick(ts) {
+      nodes.forEach(n => {
+        const ox = Math.sin(ts * n.spd + n.px) * n.amp;
+        const oy = Math.cos(ts * n.spd + n.py) * n.amp;
+        n.el.style.transform = `translate(${ox}px,${oy}px)`;
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ---- OPTION A+D+B: Canvas orbs behind cards ---- */
+function initComboBg() {
+  const canvas = document.getElementById('comboBg');
+  const wrap   = document.getElementById('comboWrap');
+  if (!canvas || !wrap) return;
+
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = wrap.offsetWidth;
+    canvas.height = wrap.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const palette = [
+    'rgba(90,122,90,0.10)','rgba(109,143,109,0.07)',
+    'rgba(139,115,85,0.08)','rgba(181,154,122,0.06)',
+    'rgba(90,122,90,0.05)',
+  ];
+
+  const orbs = Array.from({length: 7}, () => ({
+    x:   Math.random() * canvas.width,
+    y:   Math.random() * canvas.height,
+    r:   60 + Math.random() * 140,
+    dx:  (Math.random() - 0.5) * 0.25,
+    dy:  (Math.random() - 0.5) * 0.25,
+    color: palette[Math.floor(Math.random() * palette.length)],
+    ph: Math.random() * Math.PI * 2,
+    fr: 0.0003 + Math.random() * 0.0002,
+    amp: 5 + Math.random() * 8,
+  }));
+
+  // Also scatter floating text tags on canvas
+  const textTags = SKILLS.slice(0, 18).map(s => ({
+    text: s,
+    x: 30 + Math.random() * (canvas.width - 60),
+    y: 30 + Math.random() * (canvas.height - 60),
+    ph: Math.random() * Math.PI * 2,
+    spd: 0.0002 + Math.random() * 0.0002,
+    amp: 4 + Math.random() * 7,
+    alpha: 0.06 + Math.random() * 0.08,
+  }));
+
+  function draw(ts) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw orbs
+    orbs.forEach(o => {
+      const ox = o.x + Math.sin(ts * o.fr + o.ph) * o.amp;
+      const oy = o.y + Math.cos(ts * o.fr + o.ph) * o.amp;
+      const g = ctx.createRadialGradient(ox, oy, 0, ox, oy, o.r);
+      g.addColorStop(0, o.color);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath();
+      ctx.arc(ox, oy, o.r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+      o.x += o.dx; o.y += o.dy;
+      if (o.x < -o.r) o.x = canvas.width + o.r;
+      if (o.x > canvas.width + o.r) o.x = -o.r;
+      if (o.y < -o.r) o.y = canvas.height + o.r;
+      if (o.y > canvas.height + o.r) o.y = -o.r;
+    });
+
+    // Draw floating text tags
+    ctx.font = '500 12px Inter, sans-serif';
+    textTags.forEach(t => {
+      const ox = Math.sin(ts * t.spd + t.ph) * t.amp;
+      const oy = Math.cos(ts * t.spd + t.ph) * t.amp;
+      ctx.globalAlpha = t.alpha;
+      ctx.fillStyle = '#5a7a5a';
+      ctx.fillText(t.text, t.x + ox, t.y + oy);
+    });
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+}
+
+/* ---- Active tab highlight on scroll ---- */
+const tabs = document.querySelectorAll('.tab');
+const sections = document.querySelectorAll('.demo-section');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => io.observe(s));
+
+/* ---- INIT ---- */
+document.addEventListener('DOMContentLoaded', () => {
+  initCloudB();
+  initComboBg();
+});
+</script>
+</body>
+</html>
