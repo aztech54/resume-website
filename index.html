@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonio Macias Lupercio — IT Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">AML<span class="nav-logo-dot">.</span></a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#about"      class="nav-link">About</a></li>
+        <li><a href="#education"  class="nav-link">Education</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#skills"     class="nav-link">Skills</a></li>
+        <li><a href="#projects"   class="nav-link">Projects</a></li>
+        <li><a href="#contact"    class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="home" class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-noise"></div>
+    <div class="hero-content">
+      <p  class="hero-greeting">Hello, I'm</p>
+      <h1 class="hero-name">
+        <span class="name-first">Antonio</span>
+        <span class="name-last">Macias Lupercio</span>
+      </h1>
+      <div class="hero-role">
+        <span class="role-dash">—</span>
+        <span id="typingText" class="typing-text"></span>
+        <span class="typing-cursor">|</span>
+      </div>
+      <p class="hero-location">
+        <span class="location-marker">◉</span> Pacific Northwest
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact"  class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-label">scroll</span>
+      <div class="scroll-line"><div class="scroll-dot"></div></div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="section about">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Who I Am</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <p class="lead">IT professional rooted in the Pacific Northwest, with a B.S. in Information Technology — Networking from the University of Washington.</p>
+          <p>My background spans networking, cybersecurity, system administration, and technical support. From configuring Cisco routers and analyzing packets with Wireshark to setting up Active Directory and running penetration testing labs — I've built a broad, hands-on foundation across the full IT spectrum.</p>
+          <p>Bilingual in English and Spanish. Always learning. Currently building a Windows Server 2022 home lab to deepen my sysadmin and virtualization skills.</p>
+          <div class="about-pills">
+            <span class="pill">Networking</span>
+            <span class="pill">Cybersecurity</span>
+            <span class="pill">System Admin</span>
+            <span class="pill">Helpdesk Support</span>
+            <span class="pill">Bilingual EN/ES</span>
+            <span class="pill">PNW</span>
+          </div>
+        </div>
+        <div class="about-stats reveal-right">
+          <div class="stat-card">
+            <div class="stat-value">B.S.</div>
+            <div class="stat-label">Information Technology<br>University of Washington</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">15+</div>
+            <div class="stat-label">IT Courses Completed<br>Networking &amp; Security</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">2</div>
+            <div class="stat-label">Languages<br>English &amp; Spanish</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">PNW</div>
+            <div class="stat-label">Pacific Northwest<br>Based &amp; Inspired</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EDUCATION ========== -->
+  <section id="education" class="section education alt-bg">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Academic Background</span>
+        <h2 class="section-title">Education</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal-left">
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-date">2017 – 2019</span>
+            <h3>B.S. Information Technology — Networking</h3>
+            <h4>University of Washington</h4>
+            <p>Comprehensive program covering network security, system administration, hardware analysis, information assurance, and AI strategies. Completed senior capstone project involving database design and agile sprint management.</p>
+            <div class="timeline-pills">
+              <span>Network Security</span>
+              <span>System Admin</span>
+              <span>Information Assurance</span>
+              <span>AI Strategies</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-left">
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-date">2016 – 2017</span>
+            <h3>A.A. Transfer — Arts &amp; Sciences</h3>
+            <h4>Highline College</h4>
+            <p>Transfer coursework with strong academic performance. Maintained a 3.6 GPA in Object-Oriented Programming while building the foundation for the UW IT program.</p>
+            <div class="timeline-pills">
+              <span>Object-Oriented Programming</span>
+              <span>3.6 GPA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-left">
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-date">2014 – 2016</span>
+            <h3>A.A.S. Information Technology — Networking</h3>
+            <h4>Green River College</h4>
+            <p>Foundational IT networking program where I simultaneously worked as an IT Student Helpdesk technician at the campus library — applying coursework in a live support environment daily.</p>
+            <div class="timeline-pills">
+              <span>IT Networking</span>
+              <span>Helpdesk Support</span>
+              <span>Technical Support</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EXPERIENCE ========== -->
+  <section id="experience" class="section experience">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Work History</span>
+        <h2 class="section-title">Experience</h2>
+      </div>
+      <div class="exp-grid">
+
+        <div class="exp-card reveal-up">
+          <div class="exp-badge">IT</div>
+          <div class="exp-body">
+            <div class="exp-header">
+              <div>
+                <h3>IT Student Helpdesk Technician</h3>
+                <h4>Green River College — Student Library</h4>
+              </div>
+              <span class="exp-date">Sep 2015 – Sep 2016</span>
+            </div>
+            <ul class="exp-list">
+              <li>Provided Tier 1 technical support to students, faculty, and staff at the campus library</li>
+              <li>Diagnosed and resolved hardware/software issues including printing, connectivity, and device setup</li>
+              <li>Assisted users with account management and campus technology resources</li>
+              <li>Maintained equipment inventory and escalated complex issues appropriately</li>
+            </ul>
+            <div class="exp-skills">
+              <span>Tier 1 Support</span>
+              <span>Troubleshooting</span>
+              <span>Hardware/Software</span>
+              <span>Account Management</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card reveal-up delay-1">
+          <div class="exp-badge">INT</div>
+          <div class="exp-body">
+            <div class="exp-header">
+              <div>
+                <h3>IT Internship</h3>
+                <h4>University of Washington Tacoma</h4>
+              </div>
+              <span class="exp-date">2019</span>
+            </div>
+            <ul class="exp-list">
+              <li>Implemented Google Analytics and Google Tag Manager for event tracking and behavioral analysis</li>
+              <li>Configured real-time event monitoring dashboards and custom reporting views</li>
+              <li>Produced weekly reports analyzing web traffic, top events, and user engagement data</li>
+              <li>Collaborated with stakeholders to align data insights with organizational objectives</li>
+            </ul>
+            <div class="exp-skills">
+              <span>Google Analytics</span>
+              <span>Google Tag Manager</span>
+              <span>Data Analysis</span>
+              <span>Reporting</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card exp-card--minor reveal-up delay-2">
+          <div class="exp-badge exp-badge--secondary">UBR</div>
+          <div class="exp-body">
+            <div class="exp-header">
+              <div>
+                <h3>Rideshare Driver</h3>
+                <h4>Uber</h4>
+              </div>
+              <span class="exp-date">Current</span>
+            </div>
+            <p class="exp-minor-desc">Delivering reliable customer service and maintaining strong time management as an independent contractor.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section id="skills" class="section skills alt-bg">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Technical Toolkit</span>
+        <h2 class="section-title">Skills</h2>
+      </div>
+      <div class="skills-grid">
+
+        <!-- Skill bars -->
+        <div class="skills-bars reveal-left">
+          <h3 class="skills-subtitle">Core Competencies</h3>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>Networking &amp; Cisco</span><span>85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>Network Security</span><span>80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>System Administration</span><span>75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>Linux / Windows Server</span><span>70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>SQL / Databases</span><span>70%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>HTML / CSS / JavaScript</span><span>65%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>C# / OOP</span><span>60%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div>
+          </div>
+        </div>
+
+        <!-- Skill pills -->
+        <div class="skills-tags reveal-right">
+          <h3 class="skills-subtitle">Tools &amp; Technologies</h3>
+
+          <div class="skill-category">
+            <h4>Networking</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Cisco Routers</span>
+              <span class="skill-pill">TCP/IP</span>
+              <span class="skill-pill">VLAN</span>
+              <span class="skill-pill">Subnetting / VLSM</span>
+              <span class="skill-pill">Wireshark</span>
+              <span class="skill-pill">Packet Tracer</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h4>Systems &amp; Servers</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Active Directory</span>
+              <span class="skill-pill">Windows Server 2022</span>
+              <span class="skill-pill">Ubuntu Server</span>
+              <span class="skill-pill">Samba Server</span>
+              <span class="skill-pill">VMware</span>
+              <span class="skill-pill">VirtualBox</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h4>Security</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Metasploit</span>
+              <span class="skill-pill">Penetration Testing</span>
+              <span class="skill-pill">Network Forensics</span>
+              <span class="skill-pill">NIST Framework</span>
+              <span class="skill-pill">Information Assurance</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h4>Scripting &amp; Dev</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">PowerShell</span>
+              <span class="skill-pill">Bash</span>
+              <span class="skill-pill">HTML / CSS / JS</span>
+              <span class="skill-pill">C#</span>
+              <span class="skill-pill">SQL / MySQL</span>
+              <span class="skill-pill">PuTTY</span>
+              <span class="skill-pill">WinSCP</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section id="projects" class="section projects">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Featured Work</span>
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Hero project -->
+        <div class="project-card project-card--hero reveal-up">
+          <div class="project-card-inner">
+            <div class="project-status">
+              <span class="status-dot status-dot--active"></span> In Progress
+            </div>
+            <div class="project-emoji">🖥️</div>
+            <h3>Windows Server 2022 Home Lab</h3>
+            <p>Building a full virtualized Windows Server environment from the ground up — following East Charmer's <em>Windows Server Home Lab Project</em> playlist as a structured learning path.</p>
+            <div class="project-detail-box">
+              <div class="project-detail-row">
+                <strong>Environment:</strong> VMware Workstation
+              </div>
+              <div class="project-detail-row">
+                <strong>Scope:</strong> Active Directory setup, Group Policy (GPO) enforcement, file sharing, DNS configuration, user and role management
+              </div>
+              <div class="project-detail-row">
+                <strong>Goal:</strong> Simulate an enterprise domain environment to strengthen sysadmin and virtualization skills
+              </div>
+            </div>
+            <div class="project-pills">
+              <span>VMware</span>
+              <span>Windows Server 2022</span>
+              <span>Active Directory</span>
+              <span>GPO</span>
+              <span>DNS</span>
+              <span>File Sharing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal-up delay-1">
+          <div class="project-card-inner">
+            <div class="project-status">
+              <span class="status-dot status-dot--done"></span> Completed
+            </div>
+            <h3>IT Analytics Integration</h3>
+            <h4>UW Tacoma — Internship</h4>
+            <p>Implemented Google Analytics and Google Tag Manager for web tracking and behavioral analysis. Built custom event tracking, real-time dashboards, and weekly engagement reports for campus stakeholders.</p>
+            <div class="project-pills">
+              <span>Google Analytics</span>
+              <span>Google Tag Manager</span>
+              <span>Data Analysis</span>
+              <span>Event Tracking</span>
+              <span>Reporting</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal-up delay-2">
+          <div class="project-card-inner">
+            <div class="project-status">
+              <span class="status-dot status-dot--done"></span> Completed
+            </div>
+            <h3>Senior Capstone — Database &amp; Sprint Management</h3>
+            <h4>University of Washington, 2019</h4>
+            <p>Senior capstone project covering relational database design, system architecture documentation, and agile sprint planning. Delivered a full product sprint backlog and schema design as part of a team project.</p>
+            <div class="project-pills">
+              <span>Database Design</span>
+              <span>Agile / Scrum</span>
+              <span>Sprint Planning</span>
+              <span>System Architecture</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal-up delay-3">
+          <div class="project-card-inner">
+            <div class="project-status">
+              <span class="status-dot status-dot--done"></span> Completed
+            </div>
+            <h3>Virtual Network Lab — Linux &amp; AD</h3>
+            <h4>UW Coursework</h4>
+            <p>Configured a virtual enterprise network including Active Directory, Samba Server, and a .NET Dev Server hosted on Linux — simulating a real-world domain environment inside a virtual network.</p>
+            <div class="project-pills">
+              <span>Active Directory</span>
+              <span>Samba Server</span>
+              <span>Linux</span>
+              <span>.NET Dev Server</span>
+              <span>Virtual Network</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COURSEWORK ========== -->
+  <section class="section coursework alt-bg">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Academic Training</span>
+        <h2 class="section-title">Relevant Coursework</h2>
+      </div>
+      <div class="course-grid reveal-up">
+        <div class="course-card"><span class="course-code">INFO 250</span><span class="course-name">Foundations of Information Networking</span></div>
+        <div class="course-card"><span class="course-code">INFO 310</span><span class="course-name">Foundations of Information Assurance</span></div>
+        <div class="course-card"><span class="course-code">INFO 320</span><span class="course-name">Hardware &amp; Software Analysis and Design</span></div>
+        <div class="course-card"><span class="course-code">INFO 370</span><span class="course-name">Managing Technical Teams</span></div>
+        <div class="course-card"><span class="course-code">INFO 441</span><span class="course-name">Network Security</span></div>
+        <div class="course-card"><span class="course-code">INFO 442</span><span class="course-name">Computer Security</span></div>
+        <div class="course-card"><span class="course-code">INFO 452</span><span class="course-name">System Administration</span></div>
+        <div class="course-card"><span class="course-code">INFO 461</span><span class="course-name">Organizational Information Assurance</span></div>
+        <div class="course-card"><span class="course-code">INFO 463</span><span class="course-name">AI Strategies</span></div>
+        <div class="course-card"><span class="course-code">INFO 230</span><span class="course-name">Web Design</span></div>
+        <div class="course-card"><span class="course-code">INFO 210</span><span class="course-name">Foundations of Information Management</span></div>
+        <div class="course-card"><span class="course-code">INFO 360</span><span class="course-name">Information System Analysis &amp; Design</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Say Hello</span>
+        <h2 class="section-title">Get In Touch</h2>
+      </div>
+      <div class="contact-content reveal-up">
+        <p class="contact-intro">
+          Actively looking for IT opportunities in helpdesk, networking, sysadmin, or security. Let's connect.
+        </p>
+        <div class="contact-methods">
+          <a href="mailto:maciaslupercio.antonio@gmail.com" class="contact-method">
+            <div class="contact-icon">✉</div>
+            <div class="contact-info">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">maciaslupercio.antonio@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:5094260781" class="contact-method">
+            <div class="contact-icon">✆</div>
+            <div class="contact-info">
+              <span class="contact-label">Phone</span>
+              <span class="contact-value">(509) 426-0781</span>
+            </div>
+          </a>
+        </div>
+        <p class="contact-language">Also fluent in Spanish — <em>¡Hablamos!</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-name">Antonio Macias Lupercio</p>
+      <p class="footer-sub">B.S. Information Technology · University of Washington · Pacific Northwest</p>
+      <p class="footer-credit">Built with HTML, CSS &amp; JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
