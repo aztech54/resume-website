@@ -157,11 +157,14 @@ function initScrollReveal() {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('revealed');
+        // Small delay so the viewer sees the element before it animates in
+        setTimeout(() => {
+          e.target.classList.add('revealed');
+        }, 120);
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+  }, { threshold: 0.18, rootMargin: '0px 0px -90px 0px' });
 
   els.forEach(el => io.observe(el));
 }

@@ -66,7 +66,7 @@ ul { list-style: none; }
 .reveal-left,
 .reveal-right {
   opacity: 0;
-  transition: opacity 0.75s ease, transform 0.75s ease;
+  transition: opacity 0.9s ease, transform 0.9s ease;
   will-change: opacity, transform;
 }
 .reveal-up    { transform: translateY(44px); }
