@@ -1012,6 +1012,9 @@ ul { list-style: none; }
   .project-card--hero { grid-column: span 1; }
 
   .course-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Hide scroll indicator on tablet/mobile — buttons overlap it */
+  .scroll-indicator { display: none; }
 }
 
 @media (max-width: 640px) {
