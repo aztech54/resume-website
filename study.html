@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Defense Guide — Tony Macias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #4e9e6e;
+      --accent-dim: #2d5c40;
+      --text: #e4e6ef;
+      --muted: #8b8fa8;
+      --yellow: #f0c040;
+      --red: #e05c5c;
+      --blue: #5c9ee0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--accent);
+      padding: 20px 16px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .progress-bar {
+      margin-top: 10px;
+      background: var(--border);
+      border-radius: 6px;
+      height: 6px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.4s ease;
+      border-radius: 6px;
+    }
+
+    .progress-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 16px 12px;
+    }
+
+    .intro {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--yellow);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .intro strong { color: var(--text); }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 24px 0 10px;
+      padding-left: 4px;
+    }
+
+    .topic {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .topic-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+    }
+
+    .topic-header:active { background: rgba(78,158,110,0.06); }
+
+    .topic-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .topic-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .topic-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .topic-source {
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .topic-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    .badge-green { background: var(--accent-dim); color: var(--accent); }
+    .badge-yellow { background: rgba(240,192,64,0.15); color: var(--yellow); }
+    .badge-red { background: rgba(224,92,92,0.15); color: var(--red); }
+
+    .chevron {
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .topic.open .chevron { transform: rotate(180deg); }
+
+    .topic-body {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .topic.open .topic-body { display: block; }
+
+    .key-concepts {
+      margin-top: 12px;
+    }
+
+    .key-concepts h4 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .concept-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .concept-tag {
+      background: rgba(78,158,110,0.1);
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.72rem;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .qa-block {
+      margin-top: 4px;
+    }
+
+    .qa-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .qa-question {
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--yellow);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .qa-question:active { background: rgba(240,192,64,0.05); }
+
+    .qa-chevron {
+      font-size: 0.7rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .qa-item.open .qa-chevron { transform: rotate(180deg); }
+
+    .qa-answer {
+      display: none;
+      padding: 10px 14px 12px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .qa-item.open .qa-answer { display: block; }
+
+    .qa-answer .tip {
+      margin-top: 8px;
+      padding: 8px 10px;
+      background: rgba(78,158,110,0.08);
+      border-left: 2px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .qa-answer .tip strong { color: var(--accent); }
+
+    .mark-btn {
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mark-btn:active { transform: scale(0.98); }
+    .mark-btn.done { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 30px 16px 10px;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Resume Defense Guide</h1>
+  <p>Tony Macias — Interview Prep</p>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0 of 7 topics reviewed</div>
+</header>
+
+<main>
+
+  <div class="intro">
+    <strong>How to use this:</strong> Tap a topic to expand it. Read the key concepts, then work through each interview question. Tap a question to see a suggested answer in your voice. When you feel solid on a topic, hit <strong>Mark as Reviewed</strong>. Progress saves automatically.
+  </div>
+
+  <div class="section-label">Core Resume Topics</div>
+
+  <!-- TOPIC 1: Active Directory & Windows Server -->
+  <div class="topic" id="topic-ad">
+    <div class="topic-header" onclick="toggleTopic('ad')">
+      <div class="topic-left">
+        <span class="topic-icon">🖥️</span>
+        <div>
+          <div class="topic-title">Active Directory & Windows Server</div>
+          <div class="topic-source">T INFO 452 · Home Lab (Windows Server 2022)</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-green" id="badge-ad">KEY</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">Domain Controller</span>
+          <span class="concept-tag">AD DS</span>
+          <span class="concept-tag">Users & Groups</span>
+          <span class="concept-tag">Group Policy (GPO)</span>
+          <span class="concept-tag">DNS</span>
+          <span class="concept-tag">DHCP</span>
+          <span class="concept-tag">OU Structure</span>
+          <span class="concept-tag">Authentication</span>
+          <span class="concept-tag">Backup & Restore</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Tell me about your experience with Active Directory." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I took Windows System Administration at UW-Tacoma where we covered AD from the ground up — setting up domain controllers, managing users and groups, applying Group Policy. After graduating I wanted to keep those skills sharp so I built a home lab running Windows Server 2022. I've got a domain set up, configured DNS and DHCP, created OUs to organize users, and practiced applying GPOs to push settings across machines. It's basically a scaled-down version of what you'd see in a real environment."
+            <div class="tip"><strong>Tip:</strong> If they follow up with "what GPOs have you applied?" — mention things like password policies, desktop wallpaper enforcement, or disabling USB ports. Simple but realistic.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between a user account and a computer account in AD?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "A user account represents a person who logs in — it has credentials, group memberships, and gets Group Policy applied based on where it sits in the OU structure. A computer account represents a machine that's joined to the domain. It authenticates to the domain separately, and you can also apply GPOs to computer accounts to control things at the machine level regardless of who logs in."
+            <div class="tip"><strong>Tip:</strong> Good follow-up to know — computer GPOs apply at startup, user GPOs apply at login.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Walk me through how you'd reset a locked user account." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "In Active Directory Users and Computers, I'd find the user, right-click, and go to Properties. Under the Account tab there's an 'Unlock account' checkbox if it's locked. I'd also reset the password there if needed and make sure 'User must change password at next logon' is checked so they set their own. Then I'd check the event logs to see what caused the lockout — could be a service running with old credentials or a phone still trying the old password."
+            <div class="tip"><strong>Tip:</strong> Mentioning the event log investigation shows you think beyond just fixing the symptom.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is a Group Policy Object and why would you use one?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "A GPO is basically a set of rules you push from the domain controller to users or computers. Instead of configuring each machine individually you define the policy once and it applies automatically. Common uses are enforcing password complexity, mapping network drives, controlling screensaver lock times, or restricting what users can access. It's a huge time saver in any environment with more than a handful of machines."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-ad" onclick="markReviewed('ad')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 2: Networking -->
+  <div class="topic" id="topic-net">
+    <div class="topic-header" onclick="toggleTopic('net')">
+      <div class="topic-left">
+        <span class="topic-icon">🌐</span>
+        <div>
+          <div class="topic-title">Networking Fundamentals</div>
+          <div class="topic-source">T INFO 250 · T INFO 441 · T INFO 463</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-green" id="badge-net">KEY</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">OSI Model</span>
+          <span class="concept-tag">TCP/IP</span>
+          <span class="concept-tag">IP Addressing</span>
+          <span class="concept-tag">Subnetting</span>
+          <span class="concept-tag">DNS</span>
+          <span class="concept-tag">DHCP</span>
+          <span class="concept-tag">Routing</span>
+          <span class="concept-tag">Switching</span>
+          <span class="concept-tag">Firewalls</span>
+          <span class="concept-tag">VLANs</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Can you walk me through the OSI model?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Sure — it's a 7-layer framework for how network communication works. Bottom up: Physical (cables, signals), Data Link (MAC addresses, switches), Network (IP addresses, routing), Transport (TCP/UDP, ports), Session (managing connections), Presentation (encryption, data formatting), Application (what the user interacts with — HTTP, DNS, FTP). In practice when you're troubleshooting you usually work bottom-up — is it a cable issue, is it getting an IP, can it reach the gateway, can it resolve DNS."
+            <div class="tip"><strong>Memory trick:</strong> "Please Do Not Throw Sausage Pizza Away" — Physical, Data Link, Network, Transport, Session, Presentation, Application.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between TCP and UDP?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "TCP is connection-oriented — it does a handshake, guarantees delivery, and retransmits if packets are lost. Good for anything where data integrity matters, like file transfers or web pages. UDP is connectionless — it just fires packets and doesn't check if they arrived. Much faster, used for things like streaming video, gaming, or DNS lookups where a little loss is acceptable but speed matters."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is subnetting and why does it matter?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Subnetting is dividing a network into smaller logical segments. It matters for a few reasons — security (you can isolate departments so accounting can't talk directly to engineering without going through a firewall), performance (smaller broadcast domains means less noise), and efficient use of IP addresses. A subnet mask tells devices which part of an IP address is the network and which part identifies the host."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What does DNS do and what happens when it fails?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "DNS translates domain names to IP addresses. Without it you'd have to memorize IP addresses for every website or server. When it fails, users typically can't reach anything by name — browsers say 'site can't be reached' — but if you ping the IP directly it still works. That's usually the tell. Troubleshooting steps: check if the DNS server is reachable, try nslookup to test resolution, check if the DNS service is running on the server."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-net" onclick="markReviewed('net')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 3: Security & Info Assurance -->
+  <div class="topic" id="topic-sec">
+    <div class="topic-header" onclick="toggleTopic('sec')">
+      <div class="topic-left">
+        <span class="topic-icon">🔐</span>
+        <div>
+          <div class="topic-title">Security & Information Assurance</div>
+          <div class="topic-source">T INFO 310 · T INFO 441 · T INFO 442 · T INFO 461 · InfraGard Internship</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-sec">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">CIA Triad</span>
+          <span class="concept-tag">Authentication</span>
+          <span class="concept-tag">Authorization</span>
+          <span class="concept-tag">Encryption</span>
+          <span class="concept-tag">Firewalls</span>
+          <span class="concept-tag">Least Privilege</span>
+          <span class="concept-tag">Threat Modeling</span>
+          <span class="concept-tag">Social Engineering</span>
+          <span class="concept-tag">MFA</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is the CIA triad?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Confidentiality, Integrity, and Availability — the three core goals of information security. Confidentiality means only authorized people can access data. Integrity means data hasn't been tampered with. Availability means systems are up and accessible when needed. Most security decisions come back to balancing these three — sometimes you tighten confidentiality in a way that impacts availability, and you have to weigh that tradeoff."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Tell me about your InfraGard internship." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "InfraGard is an FBI public-private partnership focused on infrastructure protection. The internship was part of a structured two-quarter academic program through UW-Tacoma. I got exposure to how public and private sector organizations collaborate on security threats, critical infrastructure protection, and information sharing. It reinforced the organizational side of security — not just the technical controls but the policies and communication structures around them."
+            <div class="tip"><strong>Tip:</strong> If they ask for specifics, keep it general — "structured academic program, exposure to threat intelligence sharing, infrastructure security frameworks." You don't need to overshare details.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is least privilege and why is it important?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Least privilege means users and systems only get the access they absolutely need to do their job — nothing more. It limits the blast radius if an account gets compromised. If a standard user account gets phished, the attacker only has that user's permissions. If that same user had admin rights, you've got a much bigger problem. It's a foundational principle — in AD you'd apply it by not making regular users local admins and using separate admin accounts for elevated tasks."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-sec" onclick="markReviewed('sec')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 4: Hardware & IT Support -->
+  <div class="topic" id="topic-hw">
+    <div class="topic-header" onclick="toggleTopic('hw')">
+      <div class="topic-left">
+        <span class="topic-icon">🔧</span>
+        <div>
+          <div class="topic-title">Hardware & IT Support</div>
+          <div class="topic-source">T INFO 320 · Helpdesk Experience · Sleeper PC Build</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-green" id="badge-hw">KEY</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">Troubleshooting</span>
+          <span class="concept-tag">Hardware Components</span>
+          <span class="concept-tag">OS Installation</span>
+          <span class="concept-tag">Imaging</span>
+          <span class="concept-tag">Peripherals</span>
+          <span class="concept-tag">Ticket Systems</span>
+          <span class="concept-tag">User Support</span>
+          <span class="concept-tag">Documentation</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Walk me through how you'd troubleshoot a computer that won't turn on." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Start simple — is it plugged in, is the power strip on, is the outlet working? Check the power cable and try a known-good one. If the machine powers on but nothing displays, check the monitor connection. If there's no POST at all, could be a PSU issue, a RAM seating problem, or a dead CMOS battery. I'd reseat the RAM first since that's quick and common. From there it's checking if the PSU is delivering power — using a multimeter or a PSU tester. Systematic, start cheap and easy before assuming major component failure."
+            <div class="tip"><strong>Tip:</strong> Interviewers love this question because it tests whether you think methodically or just panic and replace parts randomly.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Tell me about your helpdesk experience." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I worked helpdesk where I handled first-line support — password resets, software installs, hardware issues, and escalating anything that needed a deeper look. You get good at reading people in that role — someone calls in frustrated and your job is to solve the problem and leave them feeling heard. I got comfortable with ticketing workflows and documenting what I did so the next tech isn't starting from scratch."
+            <div class="tip"><strong>Tip:</strong> If they ask what ticketing system — be honest if you don't remember the exact name. "It was a standard ticketing system, I've also familiarized myself with how ServiceNow works" is a clean answer.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "How do you handle a frustrated user?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "First — let them finish. Don't interrupt. Once they've said their piece, acknowledge it: 'I understand this is affecting your work, let's get it sorted.' Then take control of the conversation by asking focused questions. People calm down when they feel like someone competent is handling it. I don't take the frustration personally — they're not mad at me, they're mad that their computer isn't working. My job is to be the calm one in the room."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-hw" onclick="markReviewed('hw')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 5: Infrastructure & Systems -->
+  <div class="topic" id="topic-infra">
+    <div class="topic-header" onclick="toggleTopic('infra')">
+      <div class="topic-left">
+        <span class="topic-icon">🏗️</span>
+        <div>
+          <div class="topic-title">Infrastructure & Systems Management</div>
+          <div class="topic-source">T INFO 463 · T INFO 452 · Home Lab</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-infra">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">Server Roles</span>
+          <span class="concept-tag">Virtualization</span>
+          <span class="concept-tag">Backup Strategies</span>
+          <span class="concept-tag">Storage</span>
+          <span class="concept-tag">Updates & Patching</span>
+          <span class="concept-tag">Monitoring</span>
+          <span class="concept-tag">Documentation</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Tell me about your home lab." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I set up a home lab running Windows Server 2022 to keep my skills current after graduating. I've got a domain controller configured, AD DS running with users and OUs, DNS and DHCP set up, and I use it to practice things like Group Policy, user management, and backup configurations. It's hands-on practice that goes beyond what you can learn in a classroom — you run into real issues and have to figure them out. Currently also in the middle of building a water-cooled PC which has been a deep dive into hardware."
+            <div class="tip"><strong>Tip:</strong> The home lab answer is one of your strongest — it shows initiative. Don't undersell it.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between backup and disaster recovery?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Backup is copying data so you can restore it if something goes wrong — a file gets deleted, a drive fails. Disaster recovery is the bigger picture plan for how you get an entire system or organization back online after a major event — fire, ransomware, data center outage. Backup is a component of DR, but DR also covers things like failover systems, recovery time objectives, and communication plans. One is the tool, the other is the strategy."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Why is patching important and how would you approach it?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Most breaches exploit known vulnerabilities that already have patches available — patching is one of the highest-return security tasks. My approach would be to test patches in a non-production environment first when possible, then roll out in batches rather than everything at once so you can catch issues. In a Windows environment you'd use WSUS or Intune to manage and schedule updates centrally rather than touching every machine manually."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-infra" onclick="markReviewed('infra')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 6: Your Story -->
+  <div class="topic" id="topic-story">
+    <div class="topic-header" onclick="toggleTopic('story')">
+      <div class="topic-left">
+        <span class="topic-icon">🎤</span>
+        <div>
+          <div class="topic-title">Your Story — The Hard Questions</div>
+          <div class="topic-source">Gap · Education · Why IT · Why now</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-red" id="badge-story">PRACTICE</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Tell me about yourself." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I have a B.S. in IT Networking from UW-Tacoma and an A.A.S. from Green River — the program had a strong hands-on focus, everything from networking and Windows administration to security and infrastructure. I did an internship with InfraGard through the program, which was an FBI public-private partnership focused on infrastructure security. After graduating I dealt with a health matter that's now resolved, and I've been actively re-skilling — I've got a home lab running Windows Server 2022, I'm currently building a water-cooled PC, and I'm working toward my Network+ certification. I'm bilingual in English and Spanish, and I'm ready to bring that background into an IT role."
+            <div class="tip"><strong>Tip:</strong> Keep it under 90 seconds. This version is clean — it addresses the gap without dwelling on it and ends on forward momentum.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What have you been doing since graduation in 2019?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I dealt with a personal health matter that took priority for a period — it's resolved now. During that time I didn't stop engaging with technology. I kept up with the field, and more recently I've been actively building back — home lab, studying for certifications, and working on personal projects. I'm in a good place now and focused on getting into the right role."
+            <div class="tip"><strong>Tip:</strong> Say it once, say it clean, then move forward. Don't over-explain or apologize. The home lab and cert pursuit is your proof of readiness.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Why do you want to work here specifically?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Customize this per company — but the structure is: [something specific about what they do or their mission] + [how your background connects] + [what you want to contribute]. For xAI for example: 'I want to be part of an organization that's building something genuinely new. The IT infrastructure supporting that work is critical, and I want to be part of the team keeping it running. My background in Windows administration and networking gives me a solid foundation to contribute from day one.'"
+            <div class="tip"><strong>Tip:</strong> Always do 10 minutes of research on the company before any interview. Find one specific thing about them to reference.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Where do you see yourself in 5 years?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I want to grow into a systems or network administrator role. Right now I'm focused on building strong fundamentals in IT support and infrastructure — earning my Network+ and Security+ certifications is part of that plan. In five years I'd like to be the person who owns the infrastructure, not just supports it. I see this role as the right starting point for that trajectory."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-story" onclick="markReviewed('story')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 7: Quick Fire Concepts -->
+  <div class="topic" id="topic-quick">
+    <div class="topic-header" onclick="toggleTopic('quick')">
+      <div class="topic-left">
+        <span class="topic-icon">⚡</span>
+        <div>
+          <div class="topic-title">Quick-Fire Tech Concepts</div>
+          <div class="topic-source">Common L1/L2 Interview Questions</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-quick">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between a hub, switch, and router?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "A hub broadcasts everything to all ports — dumb device, creates a lot of noise. A switch is smarter — it learns which device is on which port and sends traffic only where it needs to go, using MAC addresses. A router connects different networks together and routes traffic between them using IP addresses — it's what connects your LAN to the internet."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is DHCP and what happens if it goes down?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "DHCP automatically assigns IP addresses to devices on the network. If it goes down, new devices can't get an IP and will fall back to an APIPA address (169.254.x.x) which means they can't communicate properly on the network. Devices that already have a lease keep it until it expires. Fix: restart the DHCP service, check if the server is reachable, or temporarily assign static IPs if it's urgent."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What does ipconfig /flushdns do?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "It clears the local DNS cache. Windows caches DNS lookups to speed things up, but sometimes that cache has stale or incorrect entries — a site moved to a new IP, or a domain change hasn't propagated fully. Flushing the cache forces Windows to do a fresh DNS lookup next time. It's a common first step when someone says a website is loading the wrong thing or timing out."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is RAID and why would you use it?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "RAID stands for Redundant Array of Independent Disks — it's a way to combine multiple drives for redundancy or performance. RAID 1 mirrors data across two drives — if one fails you don't lose anything. RAID 5 stripes data with parity across three or more drives — good balance of performance and redundancy. RAID 0 stripes for speed but has no redundancy — one drive fails, you lose everything. Important note: RAID is not a backup strategy, it just protects against drive failure."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between HTTP and HTTPS?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "HTTP is unencrypted — data travels in plain text, anyone intercepting the traffic can read it. HTTPS adds TLS encryption, so the data is encrypted in transit. The server has an SSL/TLS certificate that the browser verifies. Any site handling logins, payments, or sensitive data should be HTTPS — and honestly at this point everything should be."
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-quick" onclick="markReviewed('quick')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="/">← tonymacias.me</a> &nbsp;·&nbsp; Resume Defense Guide v1.0
+</footer>
+
+<script>
+  const TOPICS = ['ad', 'net', 'sec', 'hw', 'infra', 'story', 'quick'];
+  const STORAGE_KEY = 'rdg_reviewed';
+
+  function getReviewed() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function saveReviewed(arr) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+  }
+
+  function updateProgress() {
+    const reviewed = getReviewed();
+    const count = reviewed.length;
+    const total = TOPICS.length;
+    const pct = Math.round((count / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${count} of ${total} topics reviewed`;
+  }
+
+  function markReviewed(id) {
+    const reviewed = getReviewed();
+    if (!reviewed.includes(id)) {
+      reviewed.push(id);
+      saveReviewed(reviewed);
+    }
+    const btn = document.getElementById('mark-' + id);
+    btn.textContent = '✓ Reviewed';
+    btn.classList.add('done');
+    updateProgress();
+  }
+
+  function toggleTopic(id) {
+    const el = document.getElementById('topic-' + id);
+    el.classList.toggle('open');
+  }
+
+  function toggleQA(el) {
+    const item = el.closest('.qa-item');
+    item.classList.toggle('open');
+  }
+
+  // Restore reviewed state on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const reviewed = getReviewed();
+    reviewed.forEach(id => {
+      const btn = document.getElementById('mark-' + id);
+      if (btn) {
+        btn.textContent = '✓ Reviewed';
+        btn.classList.add('done');
+      }
+    });
+    updateProgress();
+  });
+</script>
+
+</body>
+</html>
