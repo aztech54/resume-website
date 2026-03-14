@@ -8,6 +8,95 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ── Password Gate ── */
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: #0f1117;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    #gate .gate-box {
+      background: #1a1d27;
+      border: 1px solid #2a2d3a;
+      border-top: 3px solid #4e9e6e;
+      border-radius: 12px;
+      padding: 32px 24px;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    #gate .gate-icon { font-size: 2rem; margin-bottom: 12px; }
+
+    #gate h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e4e6ef;
+      margin-bottom: 4px;
+    }
+
+    #gate p {
+      font-size: 0.78rem;
+      color: #8b8fa8;
+      margin-bottom: 20px;
+    }
+
+    #gate input {
+      width: 100%;
+      background: #0f1117;
+      border: 1px solid #2a2d3a;
+      border-radius: 8px;
+      color: #e4e6ef;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      padding: 12px 14px;
+      text-align: center;
+      letter-spacing: 0.12em;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+
+    #gate input:focus { border-color: #4e9e6e; }
+    #gate input.error { border-color: #e05c5c; animation: shake 0.3s ease; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    #gate button {
+      width: 100%;
+      background: #4e9e6e;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #gate button:active { background: #3d7d57; }
+
+    #gate .gate-error {
+      font-size: 0.75rem;
+      color: #e05c5c;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+
+    #gate.hidden { display: none; }
+
     :root {
       --bg: #0f1117;
       --surface: #1a1d27;
@@ -294,6 +383,18 @@
   </style>
 </head>
 <body>
+
+<!-- Password Gate -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-icon">🔐</div>
+    <h2>Private Section</h2>
+    <p>This page is password protected.</p>
+    <input type="password" id="gateInput" placeholder="Enter password" autocomplete="off" />
+    <button onclick="checkPassword()">Unlock</button>
+    <div class="gate-error" id="gateError"></div>
+  </div>
+</div>
 
 <header>
   <h1>Resume Defense Guide</h1>
@@ -746,6 +847,36 @@
 </footer>
 
 <script>
+  // ── Password Gate ──
+  const PASSWORD = 'aztech54';          // ← change this to whatever you want
+  const AUTH_KEY = 'rdg_auth';
+
+  function checkPassword() {
+    const input = document.getElementById('gateInput');
+    const error = document.getElementById('gateError');
+    if (input.value === PASSWORD) {
+      localStorage.setItem(AUTH_KEY, 'true');
+      document.getElementById('gate').classList.add('hidden');
+      error.textContent = '';
+    } else {
+      input.classList.add('error');
+      error.textContent = 'Incorrect password. Try again.';
+      input.value = '';
+      setTimeout(() => input.classList.remove('error'), 400);
+    }
+  }
+
+  // Allow Enter key to submit
+  document.getElementById('gateInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // Check if already authenticated
+  if (localStorage.getItem(AUTH_KEY) === 'true') {
+    document.getElementById('gate').classList.add('hidden');
+  }
+
+  // ── Study Guide Logic ──
   const TOPICS = ['ad', 'net', 'sec', 'hw', 'infra', 'story', 'quick'];
   const STORAGE_KEY = 'rdg_reviewed';
 
