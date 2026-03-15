@@ -4,15 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume Defense Guide — Tony Macias</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #f5f2ec;
+      --bg-alt:     #ede8df;
+      --surface:    #ffffff;
+      --border:     #ddd5c8;
+      --green:      #5a7a5a;
+      --green-mid:  #6d8f6d;
+      --green-light:#93b893;
+      --green-dim:  #eef3ee;
+      --brown:      #8b7355;
+      --dark:       #2c2416;
+      --muted:      #6b5e4e;
+      --muted-light:#9c8e7e;
+      --yellow:     #8b6914;
+      --yellow-bg:  #fdf6e3;
+      --red:        #8b2e2e;
+      --red-bg:     #fdf0f0;
+      --shadow-sm:  0 1px 4px rgba(44,36,22,0.07);
+      --shadow-md:  0 4px 20px rgba(44,36,22,0.10);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
 
     /* ── Password Gate ── */
     #gate {
       position: fixed;
       inset: 0;
-      background: #0f1117;
+      background: rgba(245,242,236,0.97);
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -22,37 +51,39 @@
     }
 
     #gate .gate-box {
-      background: #1a1d27;
-      border: 1px solid #2a2d3a;
-      border-top: 3px solid #4e9e6e;
-      border-radius: 12px;
-      padding: 32px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      border-radius: 14px;
+      padding: 36px 28px;
       width: 100%;
       max-width: 360px;
       text-align: center;
+      box-shadow: var(--shadow-md);
     }
 
     #gate .gate-icon { font-size: 2rem; margin-bottom: 12px; }
 
     #gate h2 {
-      font-size: 1rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
       font-weight: 700;
-      color: #e4e6ef;
-      margin-bottom: 4px;
+      color: var(--dark);
+      margin-bottom: 6px;
     }
 
     #gate p {
-      font-size: 0.78rem;
-      color: #8b8fa8;
-      margin-bottom: 20px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 22px;
     }
 
     #gate input {
       width: 100%;
-      background: #0f1117;
-      border: 1px solid #2a2d3a;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
       border-radius: 8px;
-      color: #e4e6ef;
+      color: var(--dark);
       font-family: 'Inter', sans-serif;
       font-size: 1rem;
       padding: 12px 14px;
@@ -63,8 +94,8 @@
       transition: border-color 0.2s;
     }
 
-    #gate input:focus { border-color: #4e9e6e; }
-    #gate input.error { border-color: #e05c5c; animation: shake 0.3s ease; }
+    #gate input:focus { border-color: var(--green); }
+    #gate input.error { border-color: var(--red); animation: shake 0.3s ease; }
 
     @keyframes shake {
       0%,100% { transform: translateX(0); }
@@ -74,7 +105,7 @@
 
     #gate button {
       width: 100%;
-      background: #4e9e6e;
+      background: var(--green);
       border: none;
       border-radius: 8px;
       color: #fff;
@@ -86,52 +117,35 @@
       transition: background 0.2s;
     }
 
-    #gate button:active { background: #3d7d57; }
+    #gate button:hover { background: #4a6a4a; }
+    #gate button:active { background: #3d5a3d; }
 
     #gate .gate-error {
       font-size: 0.75rem;
-      color: #e05c5c;
+      color: var(--red);
       margin-top: 10px;
       min-height: 18px;
     }
 
     #gate.hidden { display: none; }
 
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2a2d3a;
-      --accent: #4e9e6e;
-      --accent-dim: #2d5c40;
-      --text: #e4e6ef;
-      --muted: #8b8fa8;
-      --yellow: #f0c040;
-      --red: #e05c5c;
-      --blue: #5c9ee0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 0 0 60px;
-    }
-
+    /* ── Header ── */
     header {
       background: var(--surface);
-      border-bottom: 2px solid var(--accent);
+      border-bottom: 2px solid var(--green);
       padding: 20px 16px 16px;
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: var(--shadow-sm);
     }
 
     header h1 {
-      font-size: 1.1rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.02em;
+      color: var(--dark);
+      letter-spacing: 0.01em;
     }
 
     header p {
@@ -144,13 +158,13 @@
       margin-top: 10px;
       background: var(--border);
       border-radius: 6px;
-      height: 6px;
+      height: 5px;
       overflow: hidden;
     }
 
     .progress-fill {
       height: 100%;
-      background: var(--accent);
+      background: var(--green);
       width: 0%;
       transition: width 0.4s ease;
       border-radius: 6px;
@@ -158,20 +172,21 @@
 
     .progress-label {
       font-size: 0.7rem;
-      color: var(--muted);
+      color: var(--muted-light);
       margin-top: 4px;
     }
 
+    /* ── Main ── */
     main {
       max-width: 700px;
       margin: 0 auto;
-      padding: 16px 12px;
+      padding: 20px 14px;
     }
 
     .intro {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--yellow);
+      background: var(--yellow-bg);
+      border: 1px solid #e8d9a0;
+      border-left: 3px solid #c9a84c;
       border-radius: 8px;
       padding: 14px 16px;
       margin-bottom: 20px;
@@ -180,24 +195,26 @@
       line-height: 1.6;
     }
 
-    .intro strong { color: var(--text); }
+    .intro strong { color: var(--dark); }
 
     .section-label {
       font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--green);
       margin: 24px 0 10px;
-      padding-left: 4px;
+      padding-left: 2px;
     }
 
+    /* ── Topic Cards ── */
     .topic {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       margin-bottom: 10px;
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
 
     .topic-header {
@@ -210,7 +227,8 @@
       gap: 12px;
     }
 
-    .topic-header:active { background: rgba(78,158,110,0.06); }
+    .topic-header:hover { background: var(--bg); }
+    .topic-header:active { background: var(--bg-alt); }
 
     .topic-left {
       display: flex;
@@ -220,38 +238,36 @@
       min-width: 0;
     }
 
-    .topic-icon {
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
+    .topic-icon { font-size: 1.1rem; flex-shrink: 0; }
 
     .topic-title {
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--text);
+      color: var(--dark);
     }
 
     .topic-source {
       font-size: 0.68rem;
-      color: var(--muted);
+      color: var(--muted-light);
       margin-top: 1px;
     }
 
     .topic-badge {
-      font-size: 0.65rem;
+      font-size: 0.63rem;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 9px;
       border-radius: 20px;
       flex-shrink: 0;
+      letter-spacing: 0.04em;
     }
 
-    .badge-green { background: var(--accent-dim); color: var(--accent); }
-    .badge-yellow { background: rgba(240,192,64,0.15); color: var(--yellow); }
-    .badge-red { background: rgba(224,92,92,0.15); color: var(--red); }
+    .badge-green  { background: var(--green-dim); color: var(--green); border: 1px solid #c2d9c2; }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid #e8d9a0; }
+    .badge-red    { background: var(--red-bg);    color: var(--red);    border: 1px solid #f0c8c8; }
 
     .chevron {
-      font-size: 0.8rem;
-      color: var(--muted);
+      font-size: 0.75rem;
+      color: var(--muted-light);
       transition: transform 0.25s ease;
       flex-shrink: 0;
     }
@@ -262,20 +278,20 @@
       display: none;
       padding: 0 16px 16px;
       border-top: 1px solid var(--border);
+      background: var(--bg);
     }
 
     .topic.open .topic-body { display: block; }
 
-    .key-concepts {
-      margin-top: 12px;
-    }
+    /* ── Key Concepts ── */
+    .key-concepts { margin-top: 14px; }
 
     .key-concepts h4 {
-      font-size: 0.7rem;
+      font-size: 0.67rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--green);
       margin-bottom: 8px;
     }
 
@@ -287,30 +303,30 @@
     }
 
     .concept-tag {
-      background: rgba(78,158,110,0.1);
-      border: 1px solid var(--accent-dim);
-      color: var(--accent);
+      background: var(--green-dim);
+      border: 1px solid #c2d9c2;
+      color: var(--green);
       font-size: 0.72rem;
-      padding: 3px 9px;
+      padding: 3px 10px;
       border-radius: 20px;
     }
 
-    .qa-block {
-      margin-top: 4px;
-    }
+    /* ── Q&A ── */
+    .qa-block { margin-top: 4px; }
 
     .qa-item {
       border: 1px solid var(--border);
       border-radius: 8px;
       margin-bottom: 8px;
       overflow: hidden;
+      background: var(--surface);
     }
 
     .qa-question {
       padding: 10px 14px;
       font-size: 0.82rem;
       font-weight: 600;
-      color: var(--yellow);
+      color: var(--brown);
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -319,11 +335,11 @@
       user-select: none;
     }
 
-    .qa-question:active { background: rgba(240,192,64,0.05); }
+    .qa-question:hover { background: #fdf8f2; }
 
     .qa-chevron {
-      font-size: 0.7rem;
-      color: var(--muted);
+      font-size: 0.68rem;
+      color: var(--muted-light);
       transition: transform 0.2s;
       flex-shrink: 0;
     }
@@ -332,54 +348,62 @@
 
     .qa-answer {
       display: none;
-      padding: 10px 14px 12px;
+      padding: 12px 14px 14px;
       border-top: 1px solid var(--border);
-      font-size: 0.82rem;
-      line-height: 1.65;
-      color: var(--text);
-      background: rgba(0,0,0,0.2);
+      font-size: 0.83rem;
+      line-height: 1.7;
+      color: var(--dark);
+      background: var(--bg);
     }
 
     .qa-item.open .qa-answer { display: block; }
 
     .qa-answer .tip {
-      margin-top: 8px;
-      padding: 8px 10px;
-      background: rgba(78,158,110,0.08);
-      border-left: 2px solid var(--accent);
+      margin-top: 10px;
+      padding: 9px 12px;
+      background: var(--green-dim);
+      border-left: 2.5px solid var(--green);
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       color: var(--muted);
     }
 
-    .qa-answer .tip strong { color: var(--accent); }
+    .qa-answer .tip strong { color: var(--green); }
 
+    /* ── Mark Reviewed ── */
     .mark-btn {
       display: block;
       width: 100%;
       margin-top: 14px;
       padding: 10px;
       background: transparent;
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 8px;
-      color: var(--muted);
+      color: var(--muted-light);
       font-size: 0.78rem;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       transition: all 0.2s;
     }
 
+    .mark-btn:hover { border-color: var(--green); color: var(--green); }
     .mark-btn:active { transform: scale(0.98); }
-    .mark-btn.done { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+    .mark-btn.done {
+      background: var(--green-dim);
+      border-color: var(--green-light);
+      color: var(--green);
+    }
 
+    /* ── Footer ── */
     footer {
       text-align: center;
       padding: 30px 16px 10px;
       font-size: 0.72rem;
-      color: var(--muted);
+      color: var(--muted-light);
     }
 
-    footer a { color: var(--accent); text-decoration: none; }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>

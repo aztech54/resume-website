@@ -164,6 +164,22 @@ ul { list-style: none; }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
 
+/* Study nav button */
+.nav-link--study {
+  color: var(--color-green) !important;
+  border: 1.5px solid var(--color-green);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background var(--ease), color var(--ease);
+}
+.nav-link--study::after { display: none; }
+.nav-link--study:hover {
+  background: var(--color-green);
+  color: #fff !important;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
