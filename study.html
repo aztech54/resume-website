@@ -426,7 +426,7 @@
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
   </div>
-  <div class="progress-label" id="progressLabel">0 of 7 topics reviewed</div>
+  <div class="progress-label" id="progressLabel">0 of 12 topics reviewed</div>
 </header>
 
 <main>
@@ -864,10 +864,377 @@
     </div>
   </div>
 
+
+  <div class="section-label" style="margin-top:32px;">Job Posting Curriculum</div>
+
+  <!-- TOPIC 8: Device Imaging & MDM -->
+  <div class="topic" id="topic-imaging">
+    <div class="topic-header" onclick="toggleTopic('imaging')">
+      <div class="topic-left">
+        <span class="topic-icon">💿</span>
+        <div>
+          <div class="topic-title">Device Imaging & MDM</div>
+          <div class="topic-source">Intune · SCCM · WDS · Sysprep · Autopilot</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-red" id="badge-imaging">PRACTICE</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">OS Imaging</span>
+          <span class="concept-tag">WIM Files</span>
+          <span class="concept-tag">Sysprep</span>
+          <span class="concept-tag">PXE Boot</span>
+          <span class="concept-tag">WDS</span>
+          <span class="concept-tag">Microsoft Intune</span>
+          <span class="concept-tag">SCCM</span>
+          <span class="concept-tag">Autopilot</span>
+          <span class="concept-tag">MDM Enrollment</span>
+          <span class="concept-tag">Device Lifecycle</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Have you done device imaging before?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Not in a production environment, but I've been building that knowledge actively. I understand the core concept — you take a configured, Sysprep'd base image, capture it as a WIM file, and deploy it to new machines so every device ships with the same baseline config. In enterprise environments that's usually managed through tools like Intune, SCCM, or WDS. I've been exploring Intune through a dev tenant to get hands-on with the enrollment and policy deployment side."
+            <div class="tip"><strong>Tip:</strong> Being honest + showing active learning is way better than faking it. They know you're entry-level.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is Microsoft Intune used for?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Intune is Microsoft's cloud-based MDM and MAM platform. MDM — Mobile Device Management — lets you enroll devices and push policies to them remotely. You can enforce encryption, require PINs, push software, and wipe a device if it's lost or stolen. MAM — Mobile Application Management — lets you control apps on devices, even personal ones, without full device control. In a helpdesk context, Intune is how you'd image a laptop remotely, enroll it into the org's device management, and push the standard config before it ever reaches the user."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is Sysprep and why is it used before imaging?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Sysprep — System Preparation Tool — strips a Windows machine of its unique identifiers before you capture the image. Specifically it removes the SID (Security Identifier), the computer name, and resets activation. This is critical because if you clone a machine without Sysprep, every device on the network would have the same SID — which causes identity conflicts in Active Directory. Sysprep puts the machine into OOBE (Out-of-Box Experience) so the next boot triggers first-time setup and generates fresh unique IDs."
+            <div class="tip"><strong>Tip:</strong> Knowing WHY Sysprep exists (the SID problem) is what separates someone who read about imaging from someone who understands it.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Homelab task: How do you practice imaging without enterprise hardware?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            <strong>Practice plan:</strong><br><br>
+            1. <strong>WDS in your home lab</strong> — Install Windows Deployment Services on your Windows Server 2022 VM. Set up PXE boot so client VMs can pull an image over the network. Capture a base Windows 11 image.<br><br>
+            2. <strong>Microsoft 365 Dev Tenant</strong> — Sign up free at developer.microsoft.com. This gives you access to Intune. Create a test device, enroll it, and push a compliance policy.<br><br>
+            3. <strong>Windows ADK + DISM</strong> — Use the Assessment and Deployment Kit to practice capturing and applying WIM images manually from the command line. Get comfortable with: <code>dism /capture-image</code> and <code>dism /apply-image</code>.
+            <div class="tip"><strong>Tip:</strong> Even just setting up WDS and capturing one VM image gives you a real talking point. "I set up WDS in my home lab and practiced imaging VMs over PXE" is a great answer.</div>
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-imaging" onclick="markReviewed('imaging')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 9: Microsoft 365 & Entra ID -->
+  <div class="topic" id="topic-m365">
+    <div class="topic-header" onclick="toggleTopic('m365')">
+      <div class="topic-left">
+        <span class="topic-icon">☁️</span>
+        <div>
+          <div class="topic-title">Microsoft 365 & Entra ID</div>
+          <div class="topic-source">M365 Admin · Exchange Online · Teams · Entra ID (Azure AD)</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-m365">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">M365 Admin Center</span>
+          <span class="concept-tag">User Licensing</span>
+          <span class="concept-tag">Exchange Online</span>
+          <span class="concept-tag">Teams Admin</span>
+          <span class="concept-tag">SharePoint</span>
+          <span class="concept-tag">Entra ID</span>
+          <span class="concept-tag">Conditional Access</span>
+          <span class="concept-tag">MFA</span>
+          <span class="concept-tag">Hybrid Join</span>
+          <span class="concept-tag">SSO</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Walk me through onboarding a new user in Microsoft 365." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "I'd go into the M365 Admin Center, create a new user account — name, username, assign a license so they get their apps (Exchange, Teams, etc.). Then I'd set up their mailbox, add them to the right groups and distribution lists, configure MFA, and make sure they're in the right Entra ID groups so Conditional Access policies apply correctly. Then I'd hand off credentials, walk them through setting up their authenticator app, and confirm everything is working — email, Teams, access to the shared drives they need."
+            <div class="tip"><strong>Tip:</strong> This maps directly to what Helion described as "account provisioning" — onboarding is exactly this workflow.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between on-prem Active Directory and Entra ID?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "On-prem AD is the traditional domain controller running in your datacenter — it manages computers and users on the local network using LDAP and Kerberos. Entra ID (formerly Azure AD) is Microsoft's cloud-based identity platform — it handles authentication for cloud services like M365, Teams, and third-party SaaS apps using OAuth and SAML. Many orgs run both in a hybrid setup where on-prem AD syncs to Entra ID via Azure AD Connect, so users have one login for everything. Entra ID doesn't replace on-prem AD for managing local machines — that's still what you'd do with Group Policy."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is Conditional Access and why does it matter?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Conditional Access is Entra ID's policy engine — it lets you set rules for when and how users can access resources. For example: require MFA when signing in from outside the corporate network, block access from non-compliant devices, or restrict certain apps to managed devices only. It's essentially 'if this, then that' logic applied to authentication. From a helpdesk perspective, it's relevant because when a user can't access something, Conditional Access policy is one of the first things to check — their device might not be enrolled or compliant."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Homelab task: How do you get hands-on with M365?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            <strong>Practice plan (free):</strong><br><br>
+            1. <strong>M365 Developer Program</strong> — Sign up at developer.microsoft.com/microsoft-365/dev-program. Get a free 90-day M365 E5 sandbox (renewable if active). Full admin access, 25 user licenses, everything.<br><br>
+            2. <strong>Create and license users</strong> — Practice the full onboarding flow: create user → assign license → verify mailbox → add to groups → enable MFA.<br><br>
+            3. <strong>Explore Entra ID</strong> — Set up a Conditional Access policy (e.g., require MFA for all sign-ins). Create security groups and dynamic groups.<br><br>
+            4. <strong>Exchange Admin Center</strong> — Create shared mailboxes, set up mail flow rules, practice adding aliases.
+            <div class="tip"><strong>Tip:</strong> The dev sandbox is one of the best free resources in IT. It's a full enterprise M365 environment with no strings attached.</div>
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-m365" onclick="markReviewed('m365')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 10: ITIL Concepts -->
+  <div class="topic" id="topic-itil">
+    <div class="topic-header" onclick="toggleTopic('itil')">
+      <div class="topic-left">
+        <span class="topic-icon">📋</span>
+        <div>
+          <div class="topic-title">ITIL Concepts</div>
+          <div class="topic-source">ITIL 4 Foundation · Service Management · Ticket Workflows</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-itil">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">Incident</span>
+          <span class="concept-tag">Problem</span>
+          <span class="concept-tag">Change Request</span>
+          <span class="concept-tag">Service Request</span>
+          <span class="concept-tag">SLA</span>
+          <span class="concept-tag">CMDB</span>
+          <span class="concept-tag">Escalation</span>
+          <span class="concept-tag">Tier 1 / 2 / 3</span>
+          <span class="concept-tag">Knowledge Base</span>
+          <span class="concept-tag">ITSM</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the difference between an incident and a problem in ITIL?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "An incident is an unplanned interruption — something broke and needs to be fixed now. A problem is the root cause investigation — why did it break, and how do we make sure it doesn't happen again. In a helpdesk context: a user can't log in is an incident — you fix it fast, get them back to work. If ten users are all getting locked out every week, that pattern becomes a problem record you investigate to find the underlying cause, like a service account using stale credentials."
+            <div class="tip"><strong>Tip:</strong> ITIL distinguishes these because incident management is about speed (restore service) while problem management is about quality (prevent recurrence). Knowing this distinction signals you think beyond just ticket-closing.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is an SLA and what does it mean for a helpdesk tech?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "SLA — Service Level Agreement — is the agreed response and resolution time for different ticket priorities. A P1 (critical) incident might have a 15-minute response SLA. A P3 (low) might be 24 hours. For a helpdesk tech it means you need to triage tickets by priority and not let high-priority ones sit. If you're going to breach an SLA, you escalate early and communicate — you don't let it expire without warning."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is a Change Request and why does it go through an approval process?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "A Change Request is a formal proposal to modify something in the production environment — installing new software, changing a firewall rule, updating a server. Changes go through approval (often a CAB — Change Advisory Board) because uncontrolled changes are one of the biggest sources of outages. You need documentation of what's changing, why, what the rollback plan is, and who approved it. At the L1 level you're mostly submitting change requests, not approving them — but understanding the process means you document properly and don't make unauthorized changes."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "How do you study ITIL without paying for the certification?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            <strong>Free study resources:</strong><br><br>
+            1. <strong>Axelos ITIL 4 overview</strong> — axelos.com has free introductory material on ITIL 4 Foundation concepts.<br><br>
+            2. <strong>YouTube</strong> — Search "ITIL 4 Foundation free course" — there are full 4-6 hour courses. DION Training has solid free content.<br><br>
+            3. <strong>Practice tickets</strong> — When you use ServiceNow or any ticketing system, practice categorizing every action as: Incident, Problem, Service Request, or Change. Building that mental habit matters more than memorizing the ITIL lifecycle.<br><br>
+            4. <strong>Glossary focus</strong> — Know the core definitions cold: Incident, Problem, Change, Service Request, SLA, OLA, CMDB, CI. That covers 80% of what comes up in interviews.
+            <div class="tip"><strong>Tip:</strong> ITIL certification is nice but not required for L1. Knowing the vocabulary and workflow logic is what actually matters in the interview.</div>
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-itil" onclick="markReviewed('itil')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 11: macOS Support -->
+  <div class="topic" id="topic-macos">
+    <div class="topic-header" onclick="toggleTopic('macos')">
+      <div class="topic-left">
+        <span class="topic-icon">🍎</span>
+        <div>
+          <div class="topic-title">macOS Support Fundamentals</div>
+          <div class="topic-source">System Settings · FileVault · Terminal · MDM on Mac</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-macos">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">System Settings</span>
+          <span class="concept-tag">FileVault</span>
+          <span class="concept-tag">Time Machine</span>
+          <span class="concept-tag">Keychain</span>
+          <span class="concept-tag">Terminal</span>
+          <span class="concept-tag">Activity Monitor</span>
+          <span class="concept-tag">MDM Enrollment</span>
+          <span class="concept-tag">Apple Business Manager</span>
+          <span class="concept-tag">Managed Apple ID</span>
+          <span class="concept-tag">Gatekeeper</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "How do you troubleshoot a Mac that can't connect to Wi-Fi?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Same methodology as Windows — start simple. Check they're on the right SSID. Turn Wi-Fi off and back on. If no luck, forget the network and reconnect. Check System Settings → Network → Wi-Fi for IP info — if they've got a 169.254.x.x address, it's a DHCP issue. Try renewing the DHCP lease from the network details panel. If it's still not working, open Terminal and run <code>networksetup -listallhardwareports</code> to confirm the adapter is recognized, then <code>ping 8.8.8.8</code> to test connectivity. If other devices on the same network are fine, reset the Mac's network preferences — delete the Wi-Fi plist file from /Library/Preferences/SystemConfiguration/."
+            <div class="tip"><strong>Tip:</strong> macOS Terminal commands map closely to Linux — if you know Bash, you can navigate macOS Terminal fine.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is FileVault and why does it matter for IT?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "FileVault is Apple's full-disk encryption for macOS — it encrypts the entire drive with XTS-AES-128. For IT it matters for two reasons: security (if a laptop is stolen, the data is unreadable without the login credentials), and compliance (many orgs require encryption on all endpoints). When you're imaging or decommissioning a Mac, you need to know whether FileVault is enabled, who holds the recovery key (ideally stored in Intune or your MDM), and how to decrypt it for a wipe. Enabling FileVault is often enforced via MDM policy so it's automatic on enrollment."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What's the Mac equivalent of Windows Task Manager?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Activity Monitor — it's in Applications → Utilities, or just Spotlight search for it. Shows CPU, memory, energy, disk, and network usage per process. If a user says their Mac is running slow, open Activity Monitor, sort by CPU — usually something obvious is pegged at 99%. You can force-quit a process right from there. For more detail from the command line, <code>top</code> in Terminal gives you a real-time process list, same as on Linux."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "How do you practice macOS support without owning a Mac?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            <strong>Study strategies:</strong><br><br>
+            1. <strong>Apple Support documentation</strong> — support.apple.com is thorough. Search any setting or error — Apple documents everything clearly.<br><br>
+            2. <strong>macOS in VMware (gray area)</strong> — Technically possible with a macOS VM in VMware on a Mac host. If you don't have a Mac, skip this.<br><br>
+            3. <strong>YouTube walkthroughs</strong> — Search "macOS Ventura/Sonoma admin tips" — there's a ton of helpdesk-focused content showing the UI flows.<br><br>
+            4. <strong>Focus on parallels</strong> — macOS and Linux share a Unix foundation. Terminal commands, file permissions, and networking tools (ping, traceroute, netstat) behave nearly identically. Your Linux/Ubuntu knowledge transfers directly.<br><br>
+            5. <strong>Know the common calls</strong> — Password reset, Wi-Fi issues, printer setup, app won't open (Gatekeeper), Zoom/Teams audio issues. These are 80% of Mac helpdesk volume.
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-macos" onclick="markReviewed('macos')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
+  <!-- TOPIC 12: Asset Management & Lifecycle -->
+  <div class="topic" id="topic-assets">
+    <div class="topic-header" onclick="toggleTopic('assets')">
+      <div class="topic-left">
+        <span class="topic-icon">🗂️</span>
+        <div>
+          <div class="topic-title">Asset Management & Device Lifecycle</div>
+          <div class="topic-source">Inventory · CMDB · Deployment · Decommission</div>
+        </div>
+      </div>
+      <span class="topic-badge badge-yellow" id="badge-assets">SOLID</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="key-concepts">
+        <h4>Key Concepts</h4>
+        <div class="concept-list">
+          <span class="concept-tag">Asset Tracking</span>
+          <span class="concept-tag">CMDB</span>
+          <span class="concept-tag">Hardware Lifecycle</span>
+          <span class="concept-tag">Procurement</span>
+          <span class="concept-tag">Deployment</span>
+          <span class="concept-tag">Refresh Cycle</span>
+          <span class="concept-tag">Decommission</span>
+          <span class="concept-tag">Data Sanitization</span>
+          <span class="concept-tag">Serial Numbers</span>
+          <span class="concept-tag">Warranty</span>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "How would you track hardware assets in an organization?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Every device gets a record — serial number, model, assigned user, purchase date, warranty expiration, location, and current status. In a mature environment that lives in a CMDB (Configuration Management Database) — tools like ServiceNow, Snipe-IT, or even Intune's device inventory. When a device is deployed you assign it to a user. When someone leaves, the device goes back to inventory — you wipe it, log it, and it's ready for the next person. The goal is always being able to answer: what do we have, where is it, and who has it."
+            <div class="tip"><strong>Tip:</strong> At Helion specifically, "maintain accurate asset records" was listed as a responsibility. Have a clear answer for this one.</div>
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Walk me through decommissioning a laptop." <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "First, confirm the user has transferred anything they need — no data left on the machine they want to keep. Then unenroll it from MDM (Intune) so it's no longer managed. Wipe the drive — on Windows that's a full reset with drive cleaning enabled, which does multiple overwrites. On a Mac, Erase All Content and Settings from Recovery mode. Update the asset record to show it's decommissioned. If it's going to e-waste, use a certified ITAD vendor — you want documentation that the data was destroyed, especially for compliance. If it's being redeployed internally, image it fresh and assign to the new user."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "What is a hardware refresh cycle?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            "Most orgs replace laptops on a 3–5 year cycle. After that window the hardware is typically out of warranty, slower, and increasingly incompatible with current software. Planning a refresh means knowing which devices are aging out — which is why your asset database needs purchase dates. You batch replace them in waves, typically timed around budget cycles. From an IT support perspective, you're responsible for imaging the new hardware, transferring the user's data and profile, collecting the old device, and updating the asset records."
+          </div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-question" onclick="toggleQA(this)">
+            "Homelab task: How do you practice asset management?" <span class="qa-chevron">▼</span>
+          </div>
+          <div class="qa-answer">
+            <strong>Practice plan:</strong><br><br>
+            1. <strong>Snipe-IT</strong> — Free, open-source asset management platform. Self-host it on a VM in your home lab (runs on Linux + Apache). Track your own lab equipment as practice. It's the same workflow as enterprise tools.<br><br>
+            2. <strong>Build an asset spreadsheet for your home lab</strong> — Document every device you own: serial number (if applicable), specs, OS, purpose. Practice the tracking discipline even at small scale.<br><br>
+            3. <strong>Intune device inventory</strong> — In your M365 dev tenant, enroll a VM as a managed device. Explore the device record Intune creates — hardware info, compliance status, last check-in. This is what enterprise asset tracking looks like in a cloud-managed environment.
+            <div class="tip"><strong>Tip:</strong> "I've self-hosted Snipe-IT in my home lab to practice asset tracking workflows" is a genuinely impressive answer for an L1 role — almost no one at that level has done it.</div>
+          </div>
+        </div>
+      </div>
+      <button class="mark-btn" id="mark-assets" onclick="markReviewed('assets')">✓ Mark as Reviewed</button>
+    </div>
+  </div>
+
 </main>
 
 <footer>
-  <a href="/">← tonymacias.me</a> &nbsp;·&nbsp; Resume Defense Guide v1.0
+  <a href="/">← tonymacias.me</a> &nbsp;·&nbsp; Resume Defense Guide v2.0
 </footer>
 
 <script>
@@ -901,7 +1268,7 @@
   }
 
   // ── Study Guide Logic ──
-  const TOPICS = ['ad', 'net', 'sec', 'hw', 'infra', 'story', 'quick'];
+  const TOPICS = ['ad', 'net', 'sec', 'hw', 'infra', 'story', 'quick', 'imaging', 'm365', 'itil', 'macos', 'assets'];
   const STORAGE_KEY = 'rdg_reviewed';
 
   function getReviewed() {
