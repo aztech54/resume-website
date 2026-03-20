@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonio Macias Lupercio — Endpoint Systems Administrator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- RESET & BASE ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #5a7a5a;
+      --dark:   #2c2416;
+      --muted:  #6b5e4e;
+      --brown:  #8b7355;
+      --border: #d0c8bc;
+      --bg:     #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 9.5pt;
+      color: var(--dark);
+      background: #e8e4de;
+      line-height: 1.5;
+    }
+
+    /* ---- SCREEN WRAPPER ---- */
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0.5in auto;
+      padding: 0.44in 0.65in 0.44in 0.65in;
+      background: #fff;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.18);
+    }
+
+    /* ---- HEADER ---- */
+    .header { margin-bottom: 0; }
+    .header-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24pt;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 5px;
+    }
+    .header-contact {
+      font-size: 7.8pt;
+      color: var(--muted);
+      display: flex;
+      gap: 0;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .header-contact span { margin-right: 12px; }
+    .header-contact a { color: var(--muted); text-decoration: none; }
+    .header-rule {
+      border: none;
+      border-top: 1.2px solid var(--green);
+      margin: 7px 0 10px 0;
+    }
+
+    /* ---- SECTION ---- */
+    .section { margin-bottom: 8px; }
+    .section-title {
+      font-size: 7.2pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 3px;
+    }
+    .section-rule {
+      border: none;
+      border-top: 0.6px solid var(--border);
+      margin-bottom: 7px;
+    }
+
+    /* ---- SUMMARY ---- */
+    .summary {
+      font-size: 9pt;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    /* ---- EDUCATION ---- */
+    .edu-item { margin-bottom: 6px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-title {
+      font-weight: 600;
+      font-size: 9.5pt;
+      color: var(--dark);
+    }
+    .edu-school {
+      font-size: 8.8pt;
+      color: var(--brown);
+      margin-bottom: 1px;
+    }
+    .edu-detail {
+      font-size: 8.4pt;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ---- EXPERIENCE ---- */
+    .exp-item { margin-bottom: 8px; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .exp-title {
+      font-weight: 600;
+      font-size: 9.5pt;
+      color: var(--dark);
+    }
+    .exp-status {
+      font-size: 7.8pt;
+      color: var(--green);
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .exp-company {
+      font-size: 8.8pt;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li {
+      font-size: 8.8pt;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 2.5px;
+      line-height: 1.45;
+    }
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-size: 8pt;
+      top: 0.5px;
+    }
+
+    /* ---- PROJECTS ---- */
+    .proj-item { margin-bottom: 8px; }
+    .proj-item:last-child { margin-bottom: 0; }
+    .proj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .proj-title {
+      font-weight: 600;
+      font-size: 9.5pt;
+      color: var(--dark);
+    }
+    .proj-status {
+      font-size: 7.8pt;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .proj-status--active { color: var(--green); }
+    .proj-status--done   { color: var(--brown); }
+    .proj-context {
+      font-size: 8.8pt;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+    .proj-bullets { list-style: none; padding: 0; }
+    .proj-bullets li {
+      font-size: 8.8pt;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 2.5px;
+      line-height: 1.45;
+    }
+    .proj-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-size: 8pt;
+      top: 0.5px;
+    }
+    .proj-tools {
+      font-size: 8pt;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .proj-tools strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    /* ---- SKILLS (slim ATS footer) ---- */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .skills-table tr td {
+      padding: 1.5px 0;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+    .skills-table td:first-child {
+      font-weight: 600;
+      font-size: 8.5pt;
+      color: var(--dark);
+      width: 1.6in;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+    .skills-table td:last-child {
+      font-size: 8.5pt;
+      color: var(--muted);
+    }
+
+    /* ---- PRINT ---- */
+    @media print {
+      body { background: #fff; }
+      .page {
+        margin: 0;
+        padding: 0.44in 0.65in;
+        box-shadow: none;
+        width: 100%;
+        min-height: auto;
+      }
+      @page {
+        size: letter;
+        margin: 0;
+      }
+      a { color: var(--muted) !important; text-decoration: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-name">Antonio Macias Lupercio</div>
+    <div class="header-contact">
+      <span>(509) 426-0781</span>
+      <span><a href="mailto:maciaslupercio.antonio@gmail.com">maciaslupercio.antonio@gmail.com</a></span>
+      <span><a href="https://tonymacias.me">tonymacias.me</a></span>
+      <span><a href="https://github.com/aztech54">github.com/aztech54</a></span>
+      <span><a href="https://www.linkedin.com/in/tonymacias54">linkedin.com/in/tonymacias54</a></span>
+    </div>
+    <hr class="header-rule" />
+  </header>
+
+  <!-- SUMMARY -->
+  <section class="section">
+    <div class="section-title">Professional Summary</div>
+    <hr class="section-rule" />
+    <p class="summary">
+      Endpoint Systems Administrator with a B.S. in Information Technology — Networking from the University of Washington
+      and hands-on experience in endpoint device support, deployment, and lifecycle management across Windows, macOS, and
+      Linux environments. Proficient in Active Directory, Group Policy, PowerShell, Bash, and Microsoft 365, with working
+      knowledge of MECM and JAMF for endpoint administration and software distribution. Familiar with HIPAA and FERPA
+      compliance requirements in academic and healthcare IT environments. UW alumnus with deep familiarity with the
+      University's systems environment and mission. Bilingual English/Spanish.
+    </p>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <div class="section-title">Education</div>
+    <hr class="section-rule" />
+
+    <div class="edu-item">
+      <div class="edu-title">B.S. Information Technology — Networking</div>
+      <div class="edu-school">University of Washington</div>
+      <div class="edu-detail">ABET-accredited cohort program covering endpoint systems administration, network security, information assurance, and compliance frameworks including HIPAA and FERPA. Emphasized hands-on deployment, Active Directory configuration, and system administration — including a structured IT internship with a federal-adjacent security organization.</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-title">A.A.S. Information Technology — Networking</div>
+      <div class="edu-school">Green River College</div>
+      <div class="edu-detail">Foundational networking program; simultaneously served as IT Student Helpdesk Technician at the campus library.</div>
+    </div>
+
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section">
+    <div class="section-title">Experience</div>
+    <hr class="section-rule" />
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title">IT Student Helpdesk Technician</div>
+      </div>
+      <div class="exp-company">Green River College — Student Library</div>
+      <ul class="exp-bullets">
+        <li>Provided Tier 1 endpoint support to students, faculty, and staff — resolving hardware, software, print services, and network connectivity issues across Windows and macOS devices</li>
+        <li>Executed endpoint deployment and onboarding workflows — device setup, software installation, account provisioning, and access management in Active Directory environments</li>
+        <li>Managed user accounts, password resets, and access permissions; maintained hardware asset records and tracked device lifecycle from deployment through decommission</li>
+        <li>Documented service requests with thorough technical notes and escalated unresolved issues following established ITSM procedures and compliance requirements</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title">IT Internship Course</div>
+      </div>
+      <div class="exp-company">UW-Tacoma &amp; InfraGard WA Chapter &nbsp;(FBI–Private Sector Critical Infrastructure Partnership)</div>
+      <ul class="exp-bullets">
+        <li>Implemented Google Analytics and Google Tag Manager for behavioral event tracking and real-time monitoring dashboards</li>
+        <li>Produced weekly reports analyzing web traffic, user engagement, and top events for stakeholder review</li>
+        <li>Documented findings and collaborated with team leads to align data insights with organizational objectives</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title">Rideshare Driver</div>
+        <div class="exp-status">Current</div>
+      </div>
+      <div class="exp-company">Uber</div>
+      <ul class="exp-bullets">
+        <li>Maintained a 4.99/5.00 customer satisfaction rating across 11,000+ trips — consistent, high-quality client communication and reliability</li>
+        <li>Managed scheduling, real-time logistics, and digital records through Uber's platform and performance dashboard</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TECHNICAL PROJECTS -->
+  <section class="section">
+    <div class="section-title">Technical Projects</div>
+    <hr class="section-rule" />
+
+    <div class="proj-item">
+      <div class="proj-header">
+        <div class="proj-title">Windows Server 2022 Home Lab</div>
+        <div class="proj-status proj-status--active">In Progress</div>
+      </div>
+      <div class="proj-context">Self-Directed &nbsp;·&nbsp; VMware Workstation</div>
+      <ul class="proj-bullets">
+        <li>Building a fully virtualized enterprise domain environment to simulate real-world endpoint and server administration across Windows and Linux platforms</li>
+        <li>Configuring Active Directory Domain Services, Group Policy Objects (GPO), DNS, and role-based access using PowerShell automation scripts</li>
+        <li>Practicing endpoint enrollment, software distribution, and policy-based deployment using Microsoft Intune (MDM); exploring MECM and JAMF administration concepts for cross-platform device management</li>
+        <li>Administering Ubuntu Linux endpoints via VMware Workstation; practicing Bash scripting for system automation and compliance reporting workflows</li>
+      </ul>
+      <div class="proj-tools"><strong>Tools:</strong> VMware Workstation, Windows Server 2022, Active Directory, GPO, PowerShell, Bash, Microsoft Intune, MECM (exploring), JAMF (exploring)</div>
+    </div>
+
+  </section>
+
+  <!-- SKILLS (ATS keywords) -->
+  <section class="section">
+    <div class="section-title">Technical Skills</div>
+    <hr class="section-rule" />
+    <table class="skills-table">
+      <tr>
+        <td>OS &amp; Platforms</td>
+        <td>Windows 10/11, Windows Server 2022, macOS, Ubuntu Linux</td>
+      </tr>
+      <tr>
+        <td>Endpoint Management</td>
+        <td>Active Directory, Group Policy (GPO), user/role administration, asset lifecycle, print services</td>
+      </tr>
+      <tr>
+        <td>Scripting &amp; Automation</td>
+        <td>PowerShell, Bash</td>
+      </tr>
+      <tr>
+        <td>Networking</td>
+        <td>TCP/IP, DNS, DHCP, VLAN, Cisco Routers, Wireshark</td>
+      </tr>
+      <tr>
+        <td>Endpoint Tools</td>
+        <td>Microsoft Intune, MECM (exploring), JAMF (exploring), VMware Workstation</td>
+      </tr>
+      <tr>
+        <td>Collaboration &amp; M365</td>
+        <td>Microsoft 365, Microsoft Teams, SharePoint, Zoom, WebEx</td>
+      </tr>
+      <tr>
+        <td>Compliance</td>
+        <td>HIPAA, FERPA, information assurance, security documentation</td>
+      </tr>
+      <tr>
+        <td>Certifications</td>
+        <td>CompTIA Network+ <em>(In Progress)</em></td>
+      </tr>
+    </table>
+  </section>
+
+</div>
+</body>
+</html>
