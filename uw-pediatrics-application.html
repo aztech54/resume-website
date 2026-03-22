@@ -224,7 +224,7 @@
     <hr class="header-rule" />
   </header>
 
-  <div class="cl-date">March 20, 2026</div>
+  <div class="cl-date" id="cl-date"></div>
 
   <div class="cl-recipient">
     <strong>Hiring Team — UW Pediatrics IT</strong><br>
@@ -427,5 +427,9 @@
   </section>
 
 </div>
+<script>
+  const d = new Date();
+  document.getElementById('cl-date').textContent = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+</script>
 </body>
 </html>
